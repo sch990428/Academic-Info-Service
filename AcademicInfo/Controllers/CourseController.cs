@@ -54,7 +54,9 @@ namespace AcademicInfo.Controllers
         [HttpPost]
         public async Task<IActionResult> POST()
         {
-            Console.WriteLine("요청받음");
+            //받은 AccessToken을 인증하는 부분을 추가할 예정
+
+            //Console.WriteLine("요청받음");
             var connectionString = "Host=\r\nacademic-info-db.postgres.database.azure.com\r\n;Username=classhub;Password=ch55361!;Database=AcademicInfo";
             var connection = new NpgsqlConnection(connectionString);
 
