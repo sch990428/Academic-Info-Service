@@ -109,6 +109,20 @@ namespace AcademicInfo.Controllers {
             return Ok(results3);
         }
 
+        [HttpGet("/teaches/all")]
+        public IActionResult TeachesList([FromQuery] int id, string accessToken) {
+            var connectionString = "Host=\r\nacademic-info-db.postgres.database.azure.com\r\n;Username=classhub;Password=ch55361!;Database=AcademicInfo";
+            var connection = new NpgsqlConnection(connectionString);
+
+            var query = "SELECT course_id, section_id, semester, year\r\nFROM Teaches\r\nWHERE instructor_id = @instructor_id";
+            var parameters = new DynamicParameters();
+            parameters.Add("instructor_id", id);
+
+            var results = connection.Query<ClassRoom>(query, parameters);
+
+            return Ok(results);
+        }
+
         [HttpGet("/ClassRoomDetail")]
         public IActionResult ClassRoomDetail([FromQuery] string course_id, int section_id, string semester, int year, string accessToken) {
             var connectionString = "Host=\r\nacademic-info-db.postgres.database.azure.com\r\n;Username=classhub;Password=ch55361!;Database=AcademicInfo";
